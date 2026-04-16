@@ -1,4 +1,4 @@
-##Situation initiale
+## Situation initiale
 
 ### Tests fonctionnels, visuels et analyse du DOM
 
@@ -19,12 +19,15 @@ Ex : Home (ligne 147), Country (ligne 265)
 Ce qui a pour effet que
  - certains de ces composants n'ont donc pas le même nom que le fichier
  - le composant App n'est pas seul dans son fichier
-Recommandation : Déplacer chacun de ces composants dans un fichier .tsx dédié.
-
+Recommandation : Déplacer chacune de ces pages dans un fichier .tsx dédié.
 
 Beaucoup d'objets sont typés any, ce qui perd de son intérêt. Ce point remonte également lorsque l'on "linte" le code.
 Ex : ligne 271
 Recommandation : typer précisément les objets afin de tirer partie de l'usage des technologies employées, et que notamment TypeScript ne soit pas simplement un argment "marketing" dans le Readme du projet.
+
+Usage de React.FC
+Ex : ligne 147
+Recommandation : utiliser un composant classique et le typer explicitement
 
 Les données sont directement présentes dans le composant (ligne 28)
 Recommandation : déplacer les données dans un fichier distinct de configuration
@@ -37,14 +40,36 @@ Du code est dupliqué
 Ex : cartes ligne 234
 Recommandation : créer des composants prenant en charge le rendu de ces contenus.
 
+De grandes portions de code dédiées à l'affichage d'un composant visuel unique sont disséminées dans le code et nuient à la lisibilité
+Ex : graphique ligne 180
+Recommandation : Déplacer le code dans un composant
+
+Les données des graphiques sont préparées dans le composant
+Ex : ligne 180
+Recommandation : Effectuer les calculs dans un utilitaire
+
 Utilisation de `useEffect`
 Ex : Ligne 154
 Recommandation : Il est communément admis que les useEffet peuvent conduire de par leur architecture même à des problèmes de maintenabilité (effets incontrôlés notamment) et de performance (par des rendus inutiles). Par ailleurs, un useEffect peut généralement être évité. Ici par un hook par exemple
 
 Des variables qui devraient être calculées à partir des données sont codées en dur
 Ex : ligne 173
-Recommandation : calculer cette valeur à partir des données ou à minima, si elle doit être mise en dur dans un premier temps la déplacer près des données.
+Recommandation : calculer cette valeur à partir des données.
 
 L'application ne tire pas parti des états et utilise les valeurs des données pour déduire cet état
 Ex : ligne 175 pour l'état de chargement
 Recommandation : utiliser les états de React (une de ses fonctionnalités phare)
+
+## Proposition d'architecture
+
+```
+data/
+  ├── olympics.json
+src/
+  ├── components/  
+    ├──  Home.tsx
+         
+  ├── pages/  
+  ├── hooks/  
+  ├── models/  
+```
