@@ -50,7 +50,7 @@ Recommandation : Effectuer les calculs dans un utilitaire
 
 Utilisation de `useEffect`
 Ex : Ligne 154
-Recommandation : Il est communément admis que les useEffet peuvent conduire de par leur architecture même à des problèmes de maintenabilité (effets incontrôlés notamment) et de performance (par des rendus inutiles). Par ailleurs, un useEffect peut généralement être évité. Ici par un hook par exemple
+Recommandation : Il est communément admis que les useEffet peuvent conduire par leur architecture à des problèmes de maintenabilité (effets incontrôlés notamment) et de performance (par des rendus inutiles). Par ailleurs, un useEffect peut généralement être évité. Ici par un hook par exemple
 
 Des variables qui devraient être calculées à partir des données sont codées en dur
 Ex : ligne 173
@@ -62,14 +62,44 @@ Recommandation : utiliser les états de React (une de ses fonctionnalités phare
 
 ## Proposition d'architecture
 
+Conformément aux recommandations énoncées ci-dessus, l'architecture de notre application va être ajustée afin de découper les contenus de App.tsx en composants plus petits :
+* les pages : Home et Country. Ce sont des composants "intelligents" qui correspondent aux pages de l'application.
+* les graphiques : LineChart et PieChart. Ce sont des composants "bêtes". On les extrait principalement pour améliorer la lisibilité du code.
+* les données sont converties en json et stockées dans un fichier séparé.
+À terme ces données seront sans doute stockées dans une base de données.
+* le chargement des données de la home sera fait dans un "hook" personnalisé : useFetch pour charger les données
+Aujourd'hui, il s'agira d'un simple accès aux données du json, mais on anticipe ici l'accès via une API du futur backend.
+On anticipe également l'utilisation d'un hook pour charger les contenus de la page country (useFetchCountry)
+
+Les fonctions de calcul et traitement des données pourraient être regroupées dans un utilitaire (utils/olympicsUtils.ts), étant du calcul pur.
+Cependant en cas d'augmentation de la taille des données, les temps de traitements des données pourraient devenir importants et alourdir l'application pour les utilisateurs.
+Pour améliorer les performances, on peut déléguer ces traitements complexes au backend qui retournerait alors directement les données calculées via une API.
+Le hook useStatistics sera chargé de charger ces données.
+
+
 ```
-data/
-  ├── olympics.json
-src/
-  ├── components/  
-    ├──  Home.tsx
-         
-  ├── pages/  
-  ├── hooks/  
-  ├── models/  
+● p02-projet/                                                                                                                                                                                                                                                       
+  ├── data/                                                                                                                                                                                                                                                         
+  │   └── olympics.json             # Données
+  ├── src/                                                                                                                                                                                                                                                          
+  │   ├── App.tsx                                                                                                                                                                                                                                                   
+  │   ├── components/                                                                                                                                                                                                                                         
+  │   │   ├── Indicator.tsx         # Indicateur numérique                                                                                                                                                                                                                                         
+  │   │   ├── LineChart.tsx         # Graphique de la page pays                                                                                                                                                                                                                                    
+  │   │   └── PieChart.tsx          # Graphique en camembert de la page d'accueil 
+  │   ├── hooks/
+  │   │   └── useFetch.ts           # Chargement des données pour la page d'accueil
+  │   │   ├── useFetchStatisitcs.ts # Chargements des statistiques
+  │   │   └── useFetchCountry.ts    # Chargement des données d'un pays
+  │   ├── main.tsx
+  │   ├── pages/
+  │   │   ├── Country.tsx
+  │   │   └── Home.tsx
+  │   ├── types/                    # types des données Typescript
+  │   │   ├── OlympicCountry.ts 
+  │   │   ├── OlympicParticipation.ts
+  │   │   ├── OlympicStatistics.ts
+  │   │   └── OlympicsData.ts 
+  └── styles/
+      └── index.css
 ```
