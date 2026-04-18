@@ -1,17 +1,19 @@
-import {type FC, useEffect, useState} from "react";
-import {Pie} from "react-chartjs-2";
+import IndicatorCard from "../components/IndicatorCard.tsx"
+import MedalChart from "../components/MedalChart.tsx";
+import type {OlympicsData} from "../types/OlympicsData.ts";
+import type {IndicatorCardType} from "../types/IndicatorCardType.ts"
+import {useOlympics} from "../hooks/useOlympics.ts";
+import {calculateTotalParticipatingCountries, calculateTotalGamesEditions} from "../utils/olympicsUtils.ts";
 
-const Home: FC = () => {
-    // Anti-pattern 3 — Utilisation de `any` — typer pour garder les bénéfices TypeScript.
+const Home = () => {
+    const data: OlympicsData = useOlympics()
+    const totalParticipatingCountries = calculateTotalParticipatingCountries(data)
+    const totalGamesEditions = calculateTotalGamesEditions(data)
 
-    // TODO useFetch
-
-
-    // Anti-pattern 7 — État de chargement dérivé des données au lieu d'un état dédié (loading/error).
-    if (!data) {
-        return <div>Chargement...</div>
-    }
-
+    const cards: IndicatorCardType[] = [
+        {label: "Pays participants", value: totalParticipatingCountries, color: "text-blue-400"},
+        {label: "Éditions des JO", value: totalGamesEditions, color: "text-green-400"},
+    ]
 
     return (
         <div className="min-h-screen bg-gray-900 text-white p-8">
@@ -26,24 +28,13 @@ const Home: FC = () => {
                         Explorez les performances des pays au fil des années.
                     </p>
                 </div>
-
-                {/* Anti-pattern 8 — Cartes dupliquées — extraire en composant réutilisable (Indicator.tsx). */}
                 <div className="mb-2">
-                    <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center mb-2">
-                        <h3 className="text-xl font-semibold mb-2">Pays participants</h3>
-                        <p className="text-4xl font-bold text-blue-400">
-                            {totalParticipatingCountries}
-                        </p>
-                    </div>
-                    <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-                        <h3 className="text-xl font-semibold mb-2">Éditions des JO</h3>
-                        <p className="text-4xl font-bold text-green-400">
-                            {totalGamesEditions}
-                        </p>
-                    </div>
+                    {cards.map((card, index) => (
+                        <IndicatorCard key={index} label={card.label} value={card.value} color={card.color}/>
+                    ))}
                 </div>
 
-//TODO Piechart.tsx
+                <MedalChart data={data}/>
 
                 <div className="text-sm text-gray-400">
                     <p>Cliquez sur un pays pour voir ses détails</p>
@@ -52,3 +43,5 @@ const Home: FC = () => {
         </div>
     )
 }
+
+export default Home
