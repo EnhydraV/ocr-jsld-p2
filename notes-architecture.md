@@ -84,26 +84,31 @@ Le hook useStatistics sera chargé de charger ces données.
 ```
 ● p02-projet/                                                                                                                                                                                                                                                       
   ├── data/                                                                                                                                                                                                                                                         
-  │   └── olympics.json             # Données
+  │   └── olympics.json                                                                                                                                                                                                                                             
+  ├── public/                                                                                                                                                                                                                                                       
   ├── src/                                                                                                                                                                                                                                                          
-  │   ├── App.tsx                                                                                                                                                                                                                                                   
-  │   ├── components/                                                                                                                                                                                                                                         
-  │   │   ├── Indicator.tsx         # Indicateur numérique                                                                                                                                                                                                                                         
-  │   │   ├── LineChart.tsx         # Graphique de la page pays                                                                                                                                                                                                                                    
-  │   │   └── PieChart.tsx          # Graphique en camembert de la page d'accueil 
+  │   ├── components/                                                                                                                                                                                                                                               
+  │   │   ├── IndicatorCard.tsx                                                                                                                                                                                                                                 
+  │   │   ├── LineChart.tsx
+  │   │   └── MedalChart.tsx
   │   ├── hooks/
-  │   │   └── useFetch.ts           # Chargement des données pour la page d'accueil
-  │   │   ├── useFetchStatisitcs.ts # Chargements des statistiques
-  │   │   └── useFetchCountry.ts    # Chargement des données d'un pays
-  │   ├── main.tsx
+  │   │   ├── useCountry.ts
+  │   │   ├── useFetch.ts
+  │   │   ├── useOlympics.ts
+  │   │   └── useStatistics.ts
   │   ├── pages/
   │   │   ├── Country.tsx
   │   │   └── Home.tsx
-  │   ├── types/                    # types des données Typescript
-  │   │   ├── OlympicCountry.ts 
+  │   ├── styles/
+  │   │   └── index.css
+  │   ├── types/
+  │   │   ├── IndicatorCardType.ts
+  │   │   ├── OlympicCountry.ts
   │   │   ├── OlympicParticipation.ts
-  │   │   ├── OlympicStatistics.ts
-  │   │   └── OlympicsData.ts 
-  └── styles/
-      └── index.css
+  │   │   ├── OlympicsData.ts
+  │   │   └── OlympicsStatistics.ts
+  │   ├── utils/
+  │   │   └── olympicsUtils.ts
+  │   ├── App.tsx
+  │   └── main.tsx
 ```
