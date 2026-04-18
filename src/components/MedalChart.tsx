@@ -7,7 +7,7 @@ import {
     LinearScale,
     BarElement,
     LineElement,
-    PointElement,
+    PointElement
 } from 'chart.js'
 
 ChartJS.register(
@@ -23,30 +23,29 @@ ChartJS.register(
 
 import {Pie} from "react-chartjs-2";
 import type {OlympicsData} from "../types/OlympicsData.ts";
-import {calculateTotalMedals, getCountryNames} from "../utils/olympicsUtils.ts";
+import {calculateCountryMedals} from "../utils/olympicsUtils.ts";
 
+const MedalChart = ({data}: { data: OlympicsData }) => {
+    const labels: string[] = [];
+    const backgroundColors: string[] = [];
+    const borderColors: string[] = [];
+    const values: number[] = [];
+    data.forEach((c) => {
+        labels.push(c.name);
+        const rgb = c.color.join(',');
+        values.push(calculateCountryMedals(c));
+        backgroundColors.push(`rgba(${rgb}, 0.6)`);
+        borderColors.push(`rgb(${rgb})`);
+    })
 
-const MedalChart = ({data}:{data:OlympicsData}) => {
     const chartData = {
-        labels: getCountryNames(data),
+        labels: labels,
         datasets: [
             {
                 label: 'Total des médailles',
-                data: calculateTotalMedals(data),
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.6)',
-                    'rgba(54, 162, 235, 0.6)',
-                    'rgba(255, 206, 86, 0.6)',
-                    'rgba(75, 192, 192, 0.6)',
-                    'rgba(153, 102, 255, 0.6)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                ],
+                data: values,
+                backgroundColor: backgroundColors,
+                borderColor: borderColors,
                 borderWidth: 1,
             },
         ],

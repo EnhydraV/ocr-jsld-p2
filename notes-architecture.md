@@ -48,6 +48,10 @@ Les données des graphiques sont préparées dans le composant
 Ex : ligne 180
 Recommandation : Effectuer les calculs dans un utilitaire
 
+Les couleurs associées aux pays sont codées en dur (et dupliquées) dans le code associé aux graphiques
+Ex : Ligne 187
+Recommandation : Intégrer les couleurs dans les données des pays. On s'assure ainsi que les couleurs ne changent pas en fonction de la page et de l'ordre dans lesquelles sont chargés les données. Par ailleurs dans le cas où l'on ajoute un nouveau pays, on ne doit pas aller ajouter une couleur dans le code du graphique.
+
 Utilisation de `useEffect`
 Ex : Ligne 154
 Recommandation : Il est communément admis que les useEffet peuvent conduire par leur architecture à des problèmes de maintenabilité (effets incontrôlés notamment) et de performance (par des rendus inutiles). Par ailleurs, un useEffect peut généralement être évité. Ici par un hook par exemple
