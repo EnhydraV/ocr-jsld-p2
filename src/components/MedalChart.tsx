@@ -7,7 +7,9 @@ import {
     LinearScale,
     BarElement,
     LineElement,
-    PointElement
+    PointElement,
+    type ChartEvent,
+    type ActiveElement,
 } from 'chart.js'
 
 ChartJS.register(
@@ -22,20 +24,24 @@ ChartJS.register(
 )
 
 import {Pie} from "react-chartjs-2";
+import {useNavigate} from "react-router-dom";
 import type {OlympicsData} from "../types/OlympicsData.ts";
 import {calculateCountryMedals} from "../utils/olympicsUtils.ts";
 
 const MedalChart = ({data}: { data: OlympicsData }) => {
+    const navigate = useNavigate();
     const labels: string[] = [];
     const backgroundColors: string[] = [];
     const borderColors: string[] = [];
     const values: number[] = [];
+    const ids: number[] = [];
     data.forEach((c) => {
         labels.push(c.name);
         const rgb = c.color.join(',');
         values.push(calculateCountryMedals(c));
         backgroundColors.push(`rgba(${rgb}, 0.6)`);
         borderColors.push(`rgb(${rgb})`);
+        ids.push(c.id);
     })
 
     const chartData = {
@@ -62,6 +68,12 @@ const MedalChart = ({data}: { data: OlympicsData }) => {
                 },
             },
         },
+        onClick: (_e: ChartEvent, elements: ActiveElement[]) => {
+            if (elements.length > 0) {
+                const index = elements[0].index;
+                navigate(`/country/${ids[index]}`);
+            }
+        }
     }
 
 

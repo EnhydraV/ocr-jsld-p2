@@ -1,6 +1,6 @@
 import type {OlympicParticipation} from "./OlympicParticipation.ts";
 
-type RGB = [number, number, number];
+type RGB = number[];
 
 export type OlympicCountry = {
     id: number,

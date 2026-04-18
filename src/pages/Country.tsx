@@ -1,25 +1,27 @@
-
 import {useParams} from "react-router-dom";
 import IndicatorCard from "../components/IndicatorCard.tsx";
-import type {OlympicsData} from "../types/OlympicsData.ts";
 import type {IndicatorCardType} from "../types/IndicatorCardType.ts";
 import {
     calculateCountryAthletes,
     calculateCountryMedals,
     calculateCountryParticipations
 } from "../utils/olympicsUtils.ts";
+import {useCountry} from "../hooks/useCountry.ts";
+import type {OlympicCountry} from "../types/OlympicCountry.ts";
+import {LineChart} from "../components/LineChart.tsx";
 
-const Country= () => {
-    const { id } = useParams()
+const Country = () => {
+    const {id} = useParams()
+    const country: OlympicCountry | undefined = useCountry(id);
+    if (country === undefined) {
+        // TODO 404 redirect
+        return;
+    }
 
-
-    // Anti-pattern 3 — Utilisation de `any` pour l'état ne permettant pas de bénéficier de TypeScript.
-    const country: OlympicsData = olympicsData.find((c: any) => c.id === Number(id))
-
-    const cards:IndicatorCardType=[
-        {label:"Participations",value:calculateCountryParticipations(country),"text-blue-400"},
-        {label:"Médailles",value:calculateCountryMedals(country),"text-yellow-400"},
-        {label:"Athlètes",value:calculateCountryAthletes(country),"text-green-400"},
+    const cards: IndicatorCardType[] = [
+        {label: "Participations", value: calculateCountryParticipations(country), color: "text-blue-400"},
+        {label: "Médailles", value: calculateCountryMedals(country), color: "text-yellow-400"},
+        {label: "Athlètes", value: calculateCountryAthletes(country), color: "text-green-400"},
     ]
 
     return (
@@ -33,7 +35,7 @@ const Country= () => {
                 </div>
 
                 <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
-
+                    <LineChart country={country}/>
                 </div>
 
                 <div className="text-sm text-gray-400">
