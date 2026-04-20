@@ -24,7 +24,7 @@ ChartJS.register(
 )
 
 import {Pie} from "react-chartjs-2";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import type {OlympicsData} from "../types/OlympicsData.ts";
 import {calculateCountryMedals} from "../utils/olympicsUtils.ts";
 
@@ -44,7 +44,7 @@ const MedalChart = ({data}: { data: OlympicsData }) => {
         backgroundColors.push(`rgba(${rgb}, 0.6)`);
         borderColors.push(`rgb(${rgb})`);
         ids.push(c.id);
-    })
+    });
 
     const chartData = {
         labels: labels,
@@ -81,11 +81,31 @@ const MedalChart = ({data}: { data: OlympicsData }) => {
     }
 
 
-    return (<div className="bg-gray-800 p-8 rounded-lg shadow-xl">
-        <div style={{height: '400px'}}>
-            <Pie data={chartData} options={chartOptions}/>
-        </div>
-    </div>)
+    return (
+        <>
+            <div id="medal-chart-description" className="sr-only">
+                <p>
+                    Graphique en camembert affichant les différents pays ainsi que leur nombre de médailles totales
+                    respectives :
+                </p>
+                <ul>
+                    {data.map((country) => {
+                        // On doit lister les données ici et mettre un lien, sinon certains utilisateurs ne pourraient
+                        // pas les consulter ni aller à la page de détails
+                        return <li key={country.id}>{country.name} : {calculateCountryMedals(country)} médailles. <Link
+                            to={`country/${country.id}`}>Plus de données sur ce pays</Link></li>
+                    })}
+                </ul>
+            </div>
+
+            <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
+                <div style={{height: '400px'}}>
+                    <Pie data={chartData} options={chartOptions}
+                         aria-describedby="medal-chart-description"/>
+                </div>
+            </div>
+        </>
+    )
 }
 
 export default MedalChart;

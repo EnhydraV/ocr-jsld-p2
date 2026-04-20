@@ -68,7 +68,24 @@ export const CountryLineChart = ({country}: { country: OlympicCountry }) => {
         },
     }
 
-    return (<div style={{height: '400px'}}>
-        <Line data={evolutionData} options={evolutionOptions}/>
-    </div>)
+    return (
+        <>
+            <div id="line-chart-description" className="sr-only">
+                { /* On doit lister les données ici et mettre un lien, sinon certains utilisateurs ne pourraient pas les consulter*/ }
+                Graphique en courbe affichant le nombre de médaille du pays par édition :
+                <ul>
+                    {
+                        country.participations.map((participation) => {
+                            return <li
+                                key={participation.id}>{participation.year} : {participation.medalsCount} médailles</li>
+                        })
+                    }
+                </ul>
+            </div>
+
+            <div style={{height: '400px'}}>
+                <Line data={evolutionData} options={evolutionOptions} aria-role="img"
+                      aria-describedby="line-chart-description"/>
+            </div>
+        </>)
 }
