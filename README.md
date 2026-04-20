@@ -1,9 +1,10 @@
-# TéléSport — Historique des Jeux Olympiques
+#  TéléSport
+Historique des Jeux Olympiques
 
 ## Installation
 
 ```bash
-git clone https://github.com/EnhydraV/p2-dfsjs.git
+git clone https://github.com/EnhydraV/ocr-jsld-p2
 cd p2-dfsjs
 npm install
 ```
