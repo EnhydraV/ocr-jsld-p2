@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import IndicatorCard from "../components/IndicatorCard.tsx";
 import type {IndicatorCardType} from "../types/IndicatorCardType.ts";
 import {
@@ -9,13 +9,13 @@ import {
 import {useCountry} from "../hooks/useCountry.ts";
 import type {OlympicCountry} from "../types/OlympicCountry.ts";
 import {CountryLineChart} from "../components/CountryLineChart.tsx";
+import Error404 from "./Error404.tsx";
 
 const Country = () => {
     const {id} = useParams()
     const country: OlympicCountry | undefined = useCountry(id);
     if (country === undefined) {
-        // TODO 404 redirect
-        return;
+        return <Error404 />;
     }
 
     // Définition des cartes
@@ -28,6 +28,9 @@ const Country = () => {
     return (
         <div className="min-h-screen bg-gray-900 text-white p-8">
             <div className="max-w-6xl mx-auto">
+                <div className="mb-2">
+                    <Link to="/">🡄 Retour au tableau de bord</Link>
+                </div>
                 <h1 className="text-4xl font-bold mb-8">{country.name}</h1>
                 <div className="mb-2">
                     {cards.map((card, index) => (
