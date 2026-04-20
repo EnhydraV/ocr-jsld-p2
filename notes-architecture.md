@@ -87,7 +87,7 @@ Le hook useStatistics sera chargé de charger ces données.
   │   └── olympics.json                                                                                                                                                                                                                                             
   ├── public/                                                                                                                                                                                                                                                       
   ├── src/                                                                                                                                                                                                                                                          
-  │   ├── components/                                                                                                                                                                                                                                               
+  │   ├── components/                                                                                                                                                                                                                                      
   │   │   ├── IndicatorCard.tsx                                                                                                                                                                                                                                 
   │   │   ├── LineChart.tsx
   │   │   └── MedalChart.tsx

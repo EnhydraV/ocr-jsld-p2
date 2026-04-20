@@ -1,5 +1,5 @@
 import { use } from 'react'
 
-export function useFetch<T>(promise: Promise<T>, p0: undefined): T {
+export function useFetch<T>(promise: Promise<T>): T {
   return use(promise)
 }

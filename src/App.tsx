@@ -2,11 +2,12 @@ import { Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from "./pages/Home.tsx";
 import Country from "./pages/Country.tsx";
+import Loading from "./components/Loading.tsx";
 
 export const App = () => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Chargement...</div>}>
+      <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/country/:id" element={<Country />} />
