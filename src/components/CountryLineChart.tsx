@@ -23,7 +23,7 @@ ChartJS.register(
     PointElement,
 )
 
-export const LineChart = ({country}: { country: OlympicCountry }) => {
+export const CountryLineChart = ({country}: { country: OlympicCountry }) => {
     const evolutionData = {
         labels: country.participations.map((p) => p.year.toString()),
         datasets: [

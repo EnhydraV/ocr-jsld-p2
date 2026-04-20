@@ -8,7 +8,7 @@ import {
 } from "../utils/olympicsUtils.ts";
 import {useCountry} from "../hooks/useCountry.ts";
 import type {OlympicCountry} from "../types/OlympicCountry.ts";
-import {LineChart} from "../components/LineChart.tsx";
+import {CountryLineChart} from "../components/CountryLineChart.tsx";
 
 const Country = () => {
     const {id} = useParams()
@@ -18,6 +18,7 @@ const Country = () => {
         return;
     }
 
+    // Définition des cartes
     const cards: IndicatorCardType[] = [
         {label: "Participations", value: calculateCountryParticipations(country), color: "text-blue-400"},
         {label: "Médailles", value: calculateCountryMedals(country), color: "text-yellow-400"},
@@ -35,7 +36,7 @@ const Country = () => {
                 </div>
 
                 <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
-                    <LineChart country={country}/>
+                    <CountryLineChart country={country}/>
                 </div>
 
                 <div className="text-sm text-gray-400">

@@ -35,6 +35,8 @@ const MedalChart = ({data}: { data: OlympicsData }) => {
     const borderColors: string[] = [];
     const values: number[] = [];
     const ids: number[] = [];
+
+    // Les données du graphique (labels, valeurs, couleurs) sont construites dynamiquement à partir des données
     data.forEach((c) => {
         labels.push(c.name);
         const rgb = c.color.join(',');
@@ -68,6 +70,8 @@ const MedalChart = ({data}: { data: OlympicsData }) => {
                 },
             },
         },
+
+        // Ouverture du détail d'un pays au clic sur le graphique
         onClick: (_e: ChartEvent, elements: ActiveElement[]) => {
             if (elements.length > 0) {
                 const index = elements[0].index;
