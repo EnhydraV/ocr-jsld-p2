@@ -1,5 +1,4 @@
 import {Link, useParams} from "react-router-dom";
-import IndicatorCard from "../components/IndicatorCard.tsx";
 import type {IndicatorCardType} from "../types/IndicatorCardType.ts";
 import {
     calculateCountryAthletes,
@@ -10,10 +9,12 @@ import {useCountry} from "../hooks/useCountry.ts";
 import type {OlympicCountry} from "../types/OlympicCountry.ts";
 import {CountryLineChart} from "../components/CountryLineChart.tsx";
 import Error404 from "./Error404.tsx";
+import {Header} from "../components/Header.tsx";
 
 const Country = () => {
     const {id} = useParams()
     const country: OlympicCountry | undefined = useCountry(id);
+    // Les données du pays sont indisponibles ou le pays n'existe pas, on retourne une erreur 404
     if (country === undefined) {
         return <Error404 />;
     }
@@ -31,12 +32,7 @@ const Country = () => {
                 <div className="mb-2">
                     <Link to="/">🡄 Retour au tableau de bord</Link>
                 </div>
-                <h1 className="text-4xl font-bold mb-8">{country.name}</h1>
-                <div className="mb-2">
-                    {cards.map((card, index) => (
-                        <IndicatorCard key={index} label={card.label} value={card.value} color={card.color}/>
-                    ))}
-                </div>
+                <Header title={country.name} presentation="" cards={cards}/>
 
                 <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
                     <CountryLineChart country={country}/>
