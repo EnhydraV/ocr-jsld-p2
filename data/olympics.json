@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "États-Unis",
-    "color": [255, 99, 132],
+    "color": [121,61,82],
     "participations": [
       { "id": 1, "year": 2020, "city": "Tokyo", "medalsCount": 113, "athleteCount": 613 },
       { "id": 2, "year": 2016, "city": "Rio", "medalsCount": 121, "athleteCount": 555 },
@@ -14,7 +14,7 @@
   {
     "id": 2,
     "name": "Chine",
-    "color": [54, 162, 235],
+    "color": [137,161,219],
     "participations": [
       { "id": 6, "year": 2020, "city": "Tokyo", "medalsCount": 88, "athleteCount": 431 },
       { "id": 7, "year": 2016, "city": "Rio", "medalsCount": 70, "athleteCount": 413 },
@@ -26,7 +26,7 @@
   {
     "id": 3,
     "name": "Japon",
-    "color": [255, 206, 86],
+    "color": [151,128,161],
     "participations": [
       { "id": 11, "year": 2020, "city": "Tokyo", "medalsCount": 58, "athleteCount": 582 },
       { "id": 12, "year": 2016, "city": "Rio", "medalsCount": 41, "athleteCount": 338 },
@@ -38,7 +38,7 @@
   {
     "id": 4,
     "name": "Grande-Bretagne",
-    "color": [75, 192, 192],
+    "color": [191,224,241],
     "participations": [
       { "id": 16, "year": 2020, "city": "Tokyo", "medalsCount": 65, "athleteCount": 376 },
       { "id": 17, "year": 2016, "city": "Rio", "medalsCount": 67, "athleteCount": 366 },
@@ -50,7 +50,7 @@
   {
     "id": 5,
     "name": "France",
-    "color": [153, 102, 255],
+    "color": [184,203,231],
     "participations": [
       { "id": 21, "year": 2020, "city": "Tokyo", "medalsCount": 33, "athleteCount": 378 },
       { "id": 22, "year": 2016, "city": "Rio", "medalsCount": 42, "athleteCount": 401 },
@@ -62,7 +62,7 @@
   {
     "id": 6,
     "name": "Allemagne",
-    "color": [25, 102, 255],
+    "color": [149,96,101],
     "participations": [
       { "id": 26, "year": 2020, "city": "Tokyo", "medalsCount": 37, "athleteCount": 378 },
       { "id": 27, "year": 2016, "city": "Rio", "medalsCount": 42, "athleteCount": 401 },

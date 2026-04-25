@@ -21,25 +21,25 @@ const Country = () => {
 
     // Définition des cartes
     const cards: IndicatorCardType[] = [
-        {label: "Participations", value: calculateCountryParticipations(country), color: "text-blue-400"},
-        {label: "Médailles", value: calculateCountryMedals(country), color: "text-yellow-400"},
-        {label: "Athlètes", value: calculateCountryAthletes(country), color: "text-green-400"},
+        {label: "Participations", value: calculateCountryParticipations(country)},
+        {label: "Médailles", value: calculateCountryMedals(country)},
+        {label: "Athlètes", value: calculateCountryAthletes(country)},
     ]
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white p-8">
+        <div className="min-h-screen main p-8">
             <div className="max-w-6xl mx-auto">
                 <div className="mb-2">
                     <Link to="/">🡄 Retour au tableau de bord</Link>
                 </div>
                 <Header title={country.name} presentation="" cards={cards}/>
 
-                <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
+                <div className="p-8 rounded-lg shadow-xl">
                     <CountryLineChart country={country}/>
                 </div>
 
-                <div className="text-sm text-gray-400">
-                    <p>Données des 5 dernières éditions des Jeux Olympiques</p>
+                <div className="text-center text-2xl mt-2">
+                    <p>Dates</p>
                 </div>
             </div>
         </div>

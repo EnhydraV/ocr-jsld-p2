@@ -26,13 +26,13 @@ export const Header = ({title, presentation, cards}: {
 
 
     return <header>
-        <h1 className="text-4xl font-bold mb-8">
-            {title}
+        <h1 className="text-white text-center text-4xl font-400 mb-8">
+            <div className="bg-olympic-teal-500 w-auto m-auto inline-block rounded-sm p-4">{title}</div>
         </h1>
         {presentationDiv}
         <div className={`grid gap-4 mb-4 ${gridCols} grid-cols-1`}>
             {cards.map((card, index) => (
-                <IndicatorCard key={index} label={card.label} value={card.value} color={card.color}/>
+                <IndicatorCard key={index} label={card.label} value={card.value} />
             ))}
         </div>
     </header>

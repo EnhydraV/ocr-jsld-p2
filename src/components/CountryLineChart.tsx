@@ -24,14 +24,15 @@ ChartJS.register(
 )
 
 export const CountryLineChart = ({country}: { country: OlympicCountry }) => {
+    const rgb:string=country.color.join(',');
     const evolutionData = {
         labels: country.participations.map((p) => p.year.toString()),
         datasets: [
             {
                 label: 'Nombre de médailles',
                 data: country.participations.map((p) => p.medalsCount),
-                borderColor: 'rgb(75, 192, 192)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: `rgb(${rgb})`,
+                backgroundColor: `rgba(${rgb}, 0.2)`,
                 tension: 0.3,
             },
         ],
@@ -44,25 +45,28 @@ export const CountryLineChart = ({country}: { country: OlympicCountry }) => {
             legend: {
                 position: 'top' as const,
                 labels: {
-                    color: 'white',
+                    color: 'black',
                 },
             },
+            tooltip: {
+                backgroundColor: "var(--color-olympic-teal-500)",
+            }
         },
         scales: {
             y: {
                 ticks: {
-                    color: 'white',
+                    color: 'black',
                 },
                 grid: {
-                    color: 'rgba(255, 255, 255, 0.1)',
+                    color: 'rgba(0,0,0, 0.1)',
                 },
             },
             x: {
                 ticks: {
-                    color: 'white',
+                    color: 'black',
                 },
                 grid: {
-                    color: 'rgba(255, 255, 255, 0.1)',
+                    color: 'rgba(0,0,0, 0.1)',
                 },
             },
         },

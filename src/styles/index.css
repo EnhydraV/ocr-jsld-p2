@@ -1,10 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=block");
 @import 'tailwindcss';
-@import '@fontsource-variable/inter';
 
 html {
-    font-family: 'Inter Variable', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 @theme {
     --breakpoint-xl: 75rem; /* Personnalise le breakpoint (1200px) */
+    --color-olympic-teal-500: #007A8A;
+}
+
+@layer components {
+    .main {
+        @apply bg-gray-100 text-black
+    }
 }

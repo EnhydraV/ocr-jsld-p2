@@ -1,1 +1,1 @@
-export type IndicatorCardType = { label: string, value: string | number, color:string }
+export type IndicatorCardType = { label: string, value: string | number}

@@ -41,7 +41,7 @@ const MedalChart = ({data}: { data: OlympicsData }) => {
         labels.push(c.name);
         const rgb = c.color.join(',');
         values.push(calculateCountryMedals(c));
-        backgroundColors.push(`rgba(${rgb}, 0.6)`);
+        backgroundColors.push(`rgb(${rgb})`);
         borderColors.push(`rgb(${rgb})`);
         ids.push(c.id);
     });
@@ -50,14 +50,17 @@ const MedalChart = ({data}: { data: OlympicsData }) => {
         labels: labels,
         datasets: [
             {
-                label: 'Total des médailles',
+                label: '🏅',
                 data: values,
                 backgroundColor: backgroundColors,
-                borderColor: borderColors,
-                borderWidth: 1,
+                borderColors: borderColors,
             },
         ],
     }
+
+    const tooltipBg = getComputedStyle(document.documentElement)
+        .getPropertyValue('--color-olympic-teal-500')
+        .trim();
 
     const chartOptions = {
         responsive: true,
@@ -66,9 +69,13 @@ const MedalChart = ({data}: { data: OlympicsData }) => {
             legend: {
                 position: 'bottom' as const,
                 labels: {
-                    color: 'white',
+                    color: 'black',
                 },
             },
+            tooltip: {
+                backgroundColor: tooltipBg,
+                displayColors: false,
+            }
         },
 
         // Ouverture du détail d'un pays au clic sur le graphique
@@ -98,7 +105,7 @@ const MedalChart = ({data}: { data: OlympicsData }) => {
                 </ul>
             </div>
 
-            <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
+            <div className="p-8">
                 <div style={{height: '400px'}}>
                     <Pie data={chartData} options={chartOptions}
                          aria-describedby="medal-chart-description"/>
